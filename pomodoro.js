@@ -1,10 +1,14 @@
 
 function Pomodoro() {
 	var initalTime;
-	var status = 0;
+	var running = false;
 	
 	this.setup = function(time) {
 		initalTime = time || 25;
+	}
+	
+	this.play = function() {
+		running = true;
 	}
 	
 	this.getInitalTime = function() {
@@ -12,7 +16,11 @@ function Pomodoro() {
 	}
 	
 	this.isStopped = function() {
-		return status === 0;
+		return ! running;
+	}
+	
+	this.isRunning = function() {
+		return running;
 	}
 } 
 

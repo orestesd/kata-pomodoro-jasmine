@@ -35,5 +35,12 @@ describe("Parar un pomodoro", function() {
 		expect(pomodoro.isStopped()).toBe(true);
 	});
 	
+	it("Al arrancar un pomodoro comienza la cuenta atrás", function() {
+		pomodoro.setup();
+		pomodoro.play();
+		expect(pomodoro.isRunning()).toBe(true);
+		expect(pomodoro.isStopped()).toBe(false);
+	});
+	
 });
 
