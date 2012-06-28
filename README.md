@@ -31,5 +31,3 @@ REINICIAR
 ---------------------
 Un pomodoro ya arrancado se reinicia (empieza a contar el tiempo) al arrancarlo de nuevo.
 Un pomodoro se reinicia sin interrupciones.
-
-Como "bonus track" se propone crear la UI, que puede ser gráfica, linea de comandos o como desee cada cuál, pero ya sin la restricción de que dure un pomodoro todo el ejercicio.
