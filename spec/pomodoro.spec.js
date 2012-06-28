@@ -134,4 +134,14 @@ describe("Reiniciar", function() {
 		jasmine.Clock.tick(5 * 1000);
 		expect(pomodoro.getTimeLeft()).toEqual(95);
 	});
+	
+	it("Un pomodoro se reinicia sin interrupciones", function() {
+		pomodoro.setup(100);
+		pomodoro.play();
+		pomodoro.pause();
+		expect(pomodoro.interuptionCount()).toEqual(1);
+		
+		pomodoro.reset();
+		expect(pomodoro.interuptionCount()).toEqual(0);
+	});
 });
