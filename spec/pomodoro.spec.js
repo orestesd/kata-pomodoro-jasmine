@@ -69,5 +69,11 @@ describe("Interrupciones", function() {
 		pomodoro.setup();
 		expect(pomodoro.interuptionCount()).toEqual(0);
 	});
+	
+	it("Si no está arrancado no se puede interrumpir", function(){
+		pomodoro.setup();
+		pomodoro.pause()
+		expect(pomodoro.interuptionCount()).toEqual(0);
+	});
 });
 

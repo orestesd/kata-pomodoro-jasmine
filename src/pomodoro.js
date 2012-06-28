@@ -18,6 +18,11 @@ function Pomodoro() {
 		}, 1000)
 	}
 	
+	this.pause = function() {
+		running = false;
+		daemon = clearInterval(daemon);
+	}
+	
 	this.interuptionCount = function() {
 		return interuptions;
 	}
