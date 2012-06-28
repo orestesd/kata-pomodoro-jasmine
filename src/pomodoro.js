@@ -4,6 +4,7 @@ function Pomodoro() {
 	var running = false;
 	var secondsLeft;
 	var daemon;
+	var interuptions = 0;
 	
 	this.setup = function(seconds) {
 		initalTime = seconds || 25 * 60;
@@ -15,6 +16,10 @@ function Pomodoro() {
 		daemon = setInterval(function() {
 			secondsLeft -= 1;
 		}, 1000)
+	}
+	
+	this.interuptionCount = function() {
+		return interuptions;
 	}
 	
 	this.getInitalTime = function() {

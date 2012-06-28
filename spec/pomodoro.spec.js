@@ -58,3 +58,16 @@ describe("Parar un pomodoro", function() {
 	
 });
 
+
+describe("Interrupciones", function() {
+	
+	beforeEach(function() {
+    	pomodoro = new Pomodoro();
+  	});
+  	
+	it("Un pomodoro se inicia sin interrupciones", function(){
+		pomodoro.setup();
+		expect(pomodoro.interuptionCount()).toEqual(0);
+	});
+});
+
