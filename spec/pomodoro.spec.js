@@ -4,29 +4,30 @@ var pomodoro;
 describe("Crear un pomodoro", function() {
 	 
 	beforeEach(function() {
-    	pomodoro = require("../pomodoro.js").create();
+    	pomodoro = new Pomodoro();
   	});
 	 
 	
 	it("Un pomodoro dura 25 minutos por defecto", function() {
 		pomodoro.setup();
-		expect(pomodoro.getInitalTime()).toEqual(25);
+		expect(pomodoro.getInitalTime()).toEqual(25 * 60);
 	});
 	
 	it("Puedo crear un pomodoro con cualquier duración", function() {
 		pomodoro.setup(50);
 		expect(pomodoro.getInitalTime()).toEqual(50);
-		
-		pomodoro.setup();
-		expect(pomodoro.getInitalTime()).toEqual(25);
 	});
 });
 
 
 describe("Parar un pomodoro", function() {
-	 
+	
 	beforeEach(function() {
-    	pomodoro = require("../pomodoro.js").create();
+    	pomodoro = new Pomodoro();
+    	
+    	// timer mock
+    	jasmine.Clock.useMock();
+    	
   	});
 	 
 	
@@ -40,6 +41,19 @@ describe("Parar un pomodoro", function() {
 		pomodoro.play();
 		expect(pomodoro.isRunning()).toBe(true);
 		expect(pomodoro.isStopped()).toBe(false);
+	});
+	
+	it("Un pomodoro va descontando tiempo", function() {
+		pomodoro.setup(60);
+		pomodoro.play();
+		jasmine.Clock.tick(5 * 1000); // 5 segundos
+		expect(pomodoro.getTimeLeft()).toEqual(55);
+	});
+	
+	it("Un pomodoro no termina si no ha sido arrancado previamente.", function() {
+		pomodoro.setup(60);
+		jasmine.Clock.tick(61 * 1000);
+		expect(pomodoro.getTimeLeft()).toEqual(60);
 	});
 	
 });
