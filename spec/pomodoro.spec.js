@@ -63,6 +63,10 @@ describe("Interrupciones", function() {
 	
 	beforeEach(function() {
     	pomodoro = new Pomodoro();
+    	
+    	// timer mock
+    	jasmine.Clock.useMock();
+    	
   	});
   	
 	it("Un pomodoro se inicia sin interrupciones", function(){
@@ -74,6 +78,37 @@ describe("Interrupciones", function() {
 		pomodoro.setup();
 		pomodoro.pause()
 		expect(pomodoro.interuptionCount()).toEqual(0);
+	});
+	
+	it("El pomodoro cuenta las interrupciones", function() {
+		pomodoro.setup();
+		pomodoro.play();
+		
+		expect(pomodoro.interuptionCount()).toEqual(0);
+		
+		pomodoro.pause();
+		expect(pomodoro.interuptionCount()).toEqual(1);
+		
+		pomodoro.pause();
+		expect(pomodoro.interuptionCount()).toEqual(1);
+		
+		pomodoro.play();
+		pomodoro.pause();
+		expect(pomodoro.interuptionCount()).toEqual(2);
+	});
+	
+	it("Un pomodoro parado no consume tiempo", function(){
+		pomodoro.setup(100);
+		pomodoro.play();
+		
+		jasmine.Clock.tick(5 * 1000); // pasan 5 segundos
+		pomodoro.pause();
+		expect(pomodoro.getTimeLeft()).toEqual(95);  // quedan 95 segundos
+		
+		pomodoro.pause();
+		
+		jasmine.Clock.tick(5 * 1000); // pasan otros 5 segundos
+		expect(pomodoro.getTimeLeft()).toEqual(95); // siguen quedando 95 segundos
 	});
 });
 

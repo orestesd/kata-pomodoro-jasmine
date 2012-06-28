@@ -19,8 +19,11 @@ function Pomodoro() {
 	}
 	
 	this.pause = function() {
-		running = false;
-		daemon = clearInterval(daemon);
+		if (!!running) {
+			running = false;
+			interuptions++;
+			daemon = clearInterval(daemon);
+		}
 	}
 	
 	this.interuptionCount = function() {
