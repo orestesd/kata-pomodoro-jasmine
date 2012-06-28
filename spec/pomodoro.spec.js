@@ -112,3 +112,26 @@ describe("Interrupciones", function() {
 	});
 });
 
+
+describe("Reiniciar", function() {
+
+	beforeEach(function() {
+    	pomodoro = new Pomodoro();
+    	
+    	// timer mock
+    	jasmine.Clock.useMock();
+    	
+  	});
+  	
+	it("Un pomodoro ya arrancado se reinicia (empieza a contar el tiempo) al arrancarlo de nuevo", function() {
+		pomodoro.setup(100);
+		pomodoro.play();
+		
+		jasmine.Clock.tick(20 * 1000);
+		
+		pomodoro.reset();
+		
+		jasmine.Clock.tick(5 * 1000);
+		expect(pomodoro.getTimeLeft()).toEqual(95);
+	});
+});

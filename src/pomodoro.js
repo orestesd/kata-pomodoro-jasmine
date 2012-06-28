@@ -26,6 +26,10 @@ function Pomodoro() {
 		}
 	}
 	
+	this.reset = function() {
+		secondsLeft = initalTime;
+	}
+	
 	this.interuptionCount = function() {
 		return interuptions;
 	}
